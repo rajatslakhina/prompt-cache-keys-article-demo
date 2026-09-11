@@ -5,7 +5,9 @@ This package models the API's prefix cache the way the docs describe it, replays
 40-turn iOS-monorepo agent session through it, and prices every miss at the published Claude
 Fable 5.1 rates. It is the demo for the Medium article linked below.
 
-Article: (added after publish)
+Article: [Your Prompt Cache Hit Ratio Reads 86%. Seven Misses Cost More Than the Other 33 Turns Combined.](https://medium.com/@er.rajatlakhina/your-prompt-cache-hit-ratio-reads-86-seven-misses-cost-more-than-the-other-33-turns-combined-48903654beb9)
+
+![Header card: your prompt cache hit ratio reads 86%; seven misses cost more than the other 33 turns. Tiles: $3.41 for 7 misses vs $1.24 for 33 hits; 75,249 tokens re-sent by a 30-token schema change; 1 miss after treating the prefix as a key.](Article/2026-09-11-prompt-cache-keys-header.png)
 
 ## What it shows
 
@@ -20,8 +22,9 @@ tool schema re-render. The cache hit ratio still reads **85.6%**. The seven miss
 | Stabilized (5 min TTL) | 1 | 94.2% | 56,613 | $2.22 | $0.69 |
 | Stabilized (1 h TTL) | 0 | 96.6% | 0 | $2.11 | $0.00 |
 
-The same afternoon with no cache at all would cost $23.10, which is why the hit ratio looks fine
-and the bill does not. Every number above is asserted by a test in `Tests/`.
+The same afternoon with no cache at all would cost $23.10 (the same 2,309,570 input tokens at the $10
+base rate), which is why the hit ratio looks fine and the bill does not. Every cell in the table above is
+asserted by a test in `Tests/`.
 
 ## The pieces
 
