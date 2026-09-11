@@ -47,7 +47,7 @@ public enum Fixture {
         return events
     }
 
-    /// The session as most teams run it. Six things happen that each break the prefix.
+    /// The session as most teams run it. Seven things happen that each break the prefix.
     public static var baseline: SessionScript {
         SessionScript(name: "Baseline", initial: initialSnapshot, events: conversation(extras: [
             // Agent-team teammate re-announces its first-turn tools on turn two, rewriting the first message.
