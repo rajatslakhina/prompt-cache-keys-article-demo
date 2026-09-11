@@ -36,7 +36,7 @@ final class SessionSimulatorTests: XCTestCase {
         XCTAssertEqual(byTurn[2]?.tokensRecached, 157, "the changelog bug is the cheapest miss on the ledger")
     }
 
-    func testSixMissesCostMoreThanTheOtherThirtyFourTurns() {
+    func testSevenMissesCostMoreThanTheOtherThirtyThreeTurns() {
         let report = simulator.run(Fixture.baseline)
         let missCost = report.turns.filter { !$0.isHit }.reduce(0) { $0 + $1.cost }
         let hitCost = report.turns.filter(\.isHit).reduce(0) { $0 + $1.cost }
@@ -50,6 +50,7 @@ final class SessionSimulatorTests: XCTestCase {
         XCTAssertEqual(report.missCount, 1)
         XCTAssertEqual(report.causes.map(\.category), ["idle past TTL"])
         XCTAssertEqual(report.hitRatio, 0.942, accuracy: 0.001)
+        XCTAssertEqual(report.tokensRecached, 56_613)
         XCTAssertEqual(report.cost, 2.22, accuracy: 0.01)
         XCTAssertEqual(report.overspend, 0.69, accuracy: 0.01)
     }
@@ -60,6 +61,7 @@ final class SessionSimulatorTests: XCTestCase {
         XCTAssertEqual(oneHour.missCount, 0)
         XCTAssertEqual(oneHour.tokensRecached, 0)
         XCTAssertEqual(oneHour.overspend, 0, accuracy: 0.0001)
+        XCTAssertEqual(oneHour.hitRatio, 0.966, accuracy: 0.001)
         XCTAssertEqual(oneHour.cost, 2.11, accuracy: 0.01)
         XCTAssertLessThan(oneHour.cost, fiveMinute.cost)
         XCTAssertLessThan(fiveMinute.cost - oneHour.cost, 0.15, "the margin is thin: one lunch break versus 40 turns of write premium")
